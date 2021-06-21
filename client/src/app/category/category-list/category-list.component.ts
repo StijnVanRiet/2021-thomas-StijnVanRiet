@@ -15,8 +15,6 @@ export class CategoryListComponent implements OnInit {
     return this._categories;
   }
 
-  ngOnInit(): void {
-    console.log(this.categories);
-  }
+  ngOnInit(): void {}
 
 }
