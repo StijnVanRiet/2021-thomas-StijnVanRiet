@@ -6,8 +6,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./service.component.css'],
 })
 export class ServiceComponent implements OnInit {
-  @Input() name: string = '';
+  @Input() name: string;
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit() {}
 }

@@ -1,22 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Category } from '../category.model';
 
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css']
+	selector: 'app-category',
+	templateUrl: './category.component.html',
+	styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit {
-  name: string;
-  services: string[];
-  dateAdded: Date;
+	@Input() public category: Category;
 
-  constructor() { 
-    this.name = 'Barbershape Women';
-    this.services =  ["only cut", "only brushing", "cut and brushing", "coloring", "makeup"];
-    this.dateAdded = new Date();
-  }
+	constructor() {}
 
-  ngOnInit(): void {
-  }
-
+	ngOnInit() {}
 }

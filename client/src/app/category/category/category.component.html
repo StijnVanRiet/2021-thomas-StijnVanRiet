@@ -1,14 +1,14 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      <mat-icon>face</mat-icon>{{ name }}
+      <mat-icon>face</mat-icon>{{ category.name }}
     </mat-card-title>
-    <mat-card-subtitle>added on {{ dateAdded | date: "dd/MM/yyyy" }}</mat-card-subtitle>
+    <mat-card-subtitle>added on {{ category.dateAdded | date: "dd/MM/yyyy" }}</mat-card-subtitle>
 </mat-card-header>
 <mat-card-content>
   <h3 mat-subheader>services</h3>
   <mat-list>
-    <mat-list-item *ngFor="let service of services">
+    <mat-list-item *ngFor="let service of category.services">
     <app-service [name]="service"></app-service>
   </mat-list-item>
 </mat-list>
