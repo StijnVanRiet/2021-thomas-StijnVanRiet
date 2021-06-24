@@ -10,11 +10,11 @@ namespace BarberApi.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    public class ReservationController : ControllerBase
+    public class ReservationsController : ControllerBase
     {
         private readonly IReservationRepository _reservationRepository;
 
-        public ReservationController(IReservationRepository context)
+        public ReservationsController(IReservationRepository context)
         {
             _reservationRepository = context;
         }

@@ -1,6 +1,7 @@
 import { Service, ServiceJson } from './service.model';
 
 interface ReservationJson {
+  id: number;
   firstName: string;
   lastName: string;
   phoneNumber: string;
@@ -11,6 +12,7 @@ interface ReservationJson {
   date: string;
 }
 export class Reservation {
+  private _id: number;
   constructor(
     private _firstName: string,
     private _services = new Array<Service>(),
@@ -33,6 +35,7 @@ export class Reservation {
       json.barber,
       new Date(json.date)
     );
+    res._id = json.id;
     return res;
   }
 
@@ -56,7 +59,10 @@ export class Reservation {
   changeBarber(name: string) {
     this._barber = name;
   }
-
+  
+  get id(): number {
+    return this._id;
+  }
   get firstName(): string {
     return this._firstName;
   }

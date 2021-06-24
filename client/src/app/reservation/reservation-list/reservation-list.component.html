@@ -1,18 +1,30 @@
 <div fxLayout="column" fxLayoutGap="2%">
   <app-add-reservation (newReservation)="addNewReservation($event)"></app-add-reservation>
-<div
-    fxLayout="row wrap"
-    fxLayout.xs="column"
-    fxLayoutGap="0.5%"
-    fxLayoutAlign="start"
-  >
+
+  <div *ngIf="reservations$ | async as reservations; else loadingOrError">
     <div
-      class="reservation"
-      *ngFor="let reservation of reservations"
-      fxFlex="0 0 calc(25%-0.5%)"
-      fxFlex.xs="100%"
+      fxLayout="row wrap"
+      fxLayout.xs="column"
+      fxLayoutGap="0.5%"
+      fxLayoutAlign="start"
     >
-      <app-reservation [reservation]="reservation"></app-reservation>
+      <div
+        class="reservation"
+        *ngFor="let reservation of reservations"
+        fxFlex="0 0 calc(25%-0.5%)"
+        fxFlex.xs="100%"
+      >
+        <app-reservation [reservation]="reservation"></app-reservation>
+      </div>
     </div>
   </div>
+  <mat-card class="error" *ngIf="errorMessage">
+    got an error while loading the reservation list: {{ errorMessage }}
+  </mat-card>
+  <ng-template #loadingOrError>
+    <span *ngIf="errorMessage; else loading"></span>
+    <ng-template #loading>
+      <mat-spinner></mat-spinner>
+    </ng-template>
+  </ng-template>
 </div>

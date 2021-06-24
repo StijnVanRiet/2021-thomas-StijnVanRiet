@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ReservationDataService } from '../reservation-data.service';
 import { Reservation } from '../reservation.model';
 
 @Component({
@@ -9,7 +10,11 @@ import { Reservation } from '../reservation.model';
 export class ReservationComponent implements OnInit {
 	@Input() public reservation: Reservation;
 
-	constructor() {}
+	constructor(private _reservationDataService: ReservationDataService) {}
 
 	ngOnInit() {}
+
+	deleteReservation() {
+		this._reservationDataService.deleteReservation(this.reservation);
+	  }
 }

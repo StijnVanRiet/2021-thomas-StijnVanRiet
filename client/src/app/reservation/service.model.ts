@@ -9,9 +9,9 @@ export class Service {
   ) {}
 
   static fromJSON(json: ServiceJson): Service {
-    const price =
-      typeof json.price === 'string' ? parseInt(json.price) : json.price;
-    const ser = new Service(json.name, price);
+    // const price =
+    //   typeof json.price === 'string' ? parseInt(json.price) : json.price;
+    const ser = new Service(json.name, json.price);
     return ser;
   }
 

@@ -45,7 +45,7 @@ namespace BarberApi.Data
                  {
                      Id = 2,
                      FirstName = "Mia",
-                     LastName = "De Smed",
+                     LastName = "De Smedt",
                      PhoneNumber = "0488888888",
                      Email = "miadesmedt@email.com",
                      Remarks = "This is also a remark.",
