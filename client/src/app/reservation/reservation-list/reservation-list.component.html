@@ -5,11 +5,11 @@
     fxLayoutAlign="start"
   >
     <div
-      class="category"
-      *ngFor="let category of categories"
+      class="reservation"
+      *ngFor="let reservation of reservations"
       fxFlex="0 0 calc(25%-0.5%)"
       fxFlex.xs="100%"
     >
-      <app-category [category]="category"></app-category>
+      <app-reservation [reservation]="reservation"></app-reservation>
     </div>
   </div>

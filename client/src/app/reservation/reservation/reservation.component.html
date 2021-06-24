@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon>face</mat-icon> {{ reservation.firstName}} {{ reservation.lastName}}
+    </mat-card-title>
+    <mat-card-subtitle>{{ reservation.phoneNumber }}</mat-card-subtitle>
+    <mat-card-subtitle>{{ reservation.email }}</mat-card-subtitle>
+</mat-card-header>
+<mat-card-content>
+  <h3 mat-subheader>Reservation  on {{ reservation.date | date: "dd/MM/yyyy, hh:mm" }}</h3>
+  <h3 mat-subheader>Services</h3>
+  <mat-list>
+    <mat-list-item *ngFor="let service of reservation.services">
+      <h4 mat-subheader>{{service}}</h4>
+  </mat-list-item>
+</mat-list>
+<h3 mat-subheader>Barber</h3>
+<p mat-subheader>{{ reservation.barber }}</p>
+<h3 mat-subheader>Remarks</h3> 
+<p mat-subheader>{{ reservation.remarks }}</p>
+</mat-card-content>
+</mat-card>
