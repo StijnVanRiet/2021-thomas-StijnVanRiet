@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace BarberApi.Models
 {
@@ -29,6 +28,7 @@ namespace BarberApi.Models
         #region Constructors
         public Reservation()
         {
+            Services = new List<Service>();
         }
 
         public Reservation(
@@ -36,8 +36,6 @@ namespace BarberApi.Models
             string lastName,
             string phoneNumber,
             string email,
-            string remarks,
-            string barber,
             DateTime date,
             ICollection<Service> services
             ) : this()
@@ -46,8 +44,6 @@ namespace BarberApi.Models
             LastName = lastName;
             PhoneNumber = phoneNumber;
             Email = email;
-            Remarks = remarks;
-            Barber = barber;
             Date = date;
             Services = services;
         }

@@ -19,6 +19,6 @@ namespace BarberApi.DTOs
         [Required]
         public System.DateTime Date { get; set; }
         [Required]
-        public IList<Service> Services { get; set; }
+        public IList<ServiceDTO> Services { get; set; }
     }
 }

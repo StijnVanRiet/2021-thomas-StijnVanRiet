@@ -69,24 +69,6 @@ namespace BarberApi.Controllers
             return CreatedAtAction(nameof(GetReservation), new { id = reservationToCreate.Id }, reservationToCreate);
         }
 
-        // PUT: api/Reservations/5
-        /// <summary>
-        /// Modifies a reservation
-        /// </summary>
-        /// <param name="id">id of the reservation to be modified</param>
-        /// <param name="reservation">the modified reservation</param>
-        [HttpPut("{id}")]
-        public IActionResult PutReservation(int id, Reservation reservation)
-        {
-            if (id != reservation.Id)
-            {
-                return BadRequest();
-            }
-            _reservationRepository.Update(reservation);
-            _reservationRepository.SaveChanges();
-            return NoContent();
-        }
-
         // DELETE: api/Reservations/5
         /// <summary>
         /// Deletes a reservation
