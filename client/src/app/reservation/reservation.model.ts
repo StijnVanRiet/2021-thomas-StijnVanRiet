@@ -1,17 +1,19 @@
+import { Service, ServiceJson } from './service.model';
+
 interface ReservationJson {
   firstName: string;
   lastName: string;
   phoneNumber: string;
   email: string;
   remarks: string;
-  services: string[];
+  services: ServiceJson[];
   barber: string;
   date: string;
 }
 export class Reservation {
   constructor(
     private _firstName: string,
-    private _services = new Array<string>(),
+    private _services = new Array<Service>(),
     private _lastName = '',
     private _phoneNumber = '',
     private _email = '',
@@ -23,7 +25,7 @@ export class Reservation {
   static fromJSON(json: ReservationJson): Reservation {
     const res = new Reservation(
       json.firstName,
-      json.services,
+      json.services.map(Service.fromJSON),
       json.lastName,
       json.phoneNumber,
       json.email,
@@ -41,14 +43,14 @@ export class Reservation {
       phoneNumber: this.phoneNumber,
       email: this.email,
       remarks: this.remarks,
-      services: this.services,
+      services: this.services.map(ser => ser.toJSON()),
       barber: this.barber,
       date: this.date.toString()
     };
   }
 
-  addService(name: string) {
-    this._services.push(name);
+  addService(name: string, price: number) {
+    this._services.push(new Service(name, price));
   }
 
   changeBarber(name: string) {
@@ -70,7 +72,7 @@ export class Reservation {
   get remarks(): string {
     return this._remarks;
   }
-  get services(): string[] {
+  get services(): Service[] {
     return this._services;
   }
   get barber(): string {
