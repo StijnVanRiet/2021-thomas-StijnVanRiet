@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RESERVATIONS } from '../mock-reservationss';
+import { Reservation } from '../reservation.model';
+import { ReservationDataService } from '../reservation-data.service';
 
 @Component({
   selector: 'app-reservation-list',
@@ -7,14 +8,15 @@ import { RESERVATIONS } from '../mock-reservationss';
   styleUrls: ['./reservation-list.component.css']
 })
 export class ReservationListComponent implements OnInit {
-  private _reservations = RESERVATIONS;
+  constructor(private _reservationDataService: ReservationDataService) { }
 
-  constructor() { }
-
-  get reservations() {
-    return this._reservations;
+  get reservations(): Reservation[]{
+    return this._reservationDataService.reservations;
   }
 
   ngOnInit(): void {}
 
+  addNewReservation(reservation) {
+    this._reservationDataService.addNewReservation(reservation);
+  }
 }

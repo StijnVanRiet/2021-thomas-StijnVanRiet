@@ -1,3 +1,5 @@
+<div fxLayout="column" fxLayoutGap="2%">
+  <app-add-reservation (newReservation)="addNewReservation($event)"></app-add-reservation>
 <div
     fxLayout="row wrap"
     fxLayout.xs="column"
@@ -13,3 +15,4 @@
       <app-reservation [reservation]="reservation"></app-reservation>
     </div>
   </div>
+</div>

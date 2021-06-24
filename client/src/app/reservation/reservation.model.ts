@@ -11,23 +11,23 @@ interface ReservationJson {
 export class Reservation {
   constructor(
     private _firstName: string,
-    private _lastName: string,
-    private _phoneNumber: string,
-    private _email: string,
-    private _remarks: string,
     private _services = new Array<string>(),
-    private _barber: string,
+    private _lastName = '',
+    private _phoneNumber = '',
+    private _email = '',
+    private _remarks = '',
+    private _barber = '',
     private _date = new Date()
   ) {}
 
   static fromJSON(json: ReservationJson): Reservation {
     const res = new Reservation(
       json.firstName,
+      json.services,
       json.lastName,
       json.phoneNumber,
       json.email,
       json.remarks,
-      json.services,
       json.barber,
       new Date(json.date)
     );

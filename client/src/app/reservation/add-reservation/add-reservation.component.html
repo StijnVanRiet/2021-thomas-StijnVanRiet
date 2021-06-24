@@ -1,0 +1,9 @@
+<mat-card>
+    <mat-form-field>
+      <input matInput placeholder="name" type="text" 
+          #newreservationfirstname />
+    </mat-form-field>
+    <button (click)="addReservation(newreservationfirstname)" mat-raised-button>
+      add reservation
+    </button>
+  </mat-card>      
