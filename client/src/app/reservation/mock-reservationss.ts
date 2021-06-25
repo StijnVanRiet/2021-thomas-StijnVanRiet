@@ -11,7 +11,6 @@ const JsonReservations = [
       { name: 'trim cut', price: 30 },
       { name: 'quick shave', price: 20 },
     ],
-    barber: 'Piet',
     date: '2021-07-07T18:25:43.511Z',
   },
 
@@ -25,7 +24,6 @@ const JsonReservations = [
       { name: 'cut and brushing', price: 60 },
       { name: 'coloring', price: 70 },
     ],
-    barber: 'Jef',
     date: '2021-08-07T18:25:43.511Z',
   },
 ];

@@ -2,11 +2,11 @@
 
 namespace BarberApi.Data
 {
-    public class ReservationDataInitializer
+    public class BarberDataInitializer
     {
-        private readonly ReservationContext _dbContext;
+        private readonly BarberContext _dbContext;
 
-        public ReservationDataInitializer(ReservationContext dbContext)
+        public BarberDataInitializer(BarberContext dbContext)
         {
             _dbContext = dbContext;
         }

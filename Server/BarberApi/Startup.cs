@@ -23,11 +23,12 @@ namespace BarberApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<ReservationContext>(options =>
-          options.UseSqlServer(Configuration.GetConnectionString("ReservationContext")));
+            services.AddDbContext<BarberContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("ReservationContext")));
 
-            services.AddScoped<ReservationDataInitializer>();
+            services.AddScoped<BarberDataInitializer>();
             services.AddScoped<IReservationRepository, ReservationRepository>();
+            services.AddScoped<IStandardServiceRepository, StandardServiceRepository>();
             // Register the Swagger services
             services.AddOpenApiDocument(c =>
             {
@@ -41,7 +42,7 @@ namespace BarberApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ReservationDataInitializer reservationDataInitializer)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, BarberDataInitializer barberDataInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -63,7 +64,7 @@ namespace BarberApi
                 endpoints.MapControllers();
             });
 
-            reservationDataInitializer.InitializeData(); //.Wait();
+            barberDataInitializer.InitializeData(); //.Wait();
         }
     }
 }

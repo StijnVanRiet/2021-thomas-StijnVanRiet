@@ -8,7 +8,6 @@ interface ReservationJson {
   email: string;
   remarks: string;
   services: ServiceJson[];
-  barber: string;
   date: string;
 }
 export class Reservation {
@@ -20,7 +19,6 @@ export class Reservation {
     private _phoneNumber = '',
     private _email = '',
     private _remarks = '',
-    private _barber = '',
     private _date = new Date()
   ) {}
 
@@ -32,7 +30,6 @@ export class Reservation {
       json.phoneNumber,
       json.email,
       json.remarks,
-      json.barber,
       new Date(json.date)
     );
     res._id = json.id;
@@ -42,13 +39,12 @@ export class Reservation {
   toJSON(): ReservationJson {
     return <ReservationJson>{
       firstName: this.firstName,
+      services: this.services.map((ser) => ser.toJSON()),
       lastName: this.lastName,
       phoneNumber: this.phoneNumber,
       email: this.email,
       remarks: this.remarks,
-      services: this.services.map(ser => ser.toJSON()),
-      barber: this.barber,
-      date: this.date.toString()
+      date: new Date(this.date).toISOString(),
     };
   }
 
@@ -56,10 +52,6 @@ export class Reservation {
     this._services.push(new Service(name, price));
   }
 
-  changeBarber(name: string) {
-    this._barber = name;
-  }
-  
   get id(): number {
     return this._id;
   }
@@ -81,11 +73,7 @@ export class Reservation {
   get services(): Service[] {
     return this._services;
   }
-  get barber(): string {
-    return this._barber;
-  }
   get date(): Date {
     return this._date;
   }
-
 }

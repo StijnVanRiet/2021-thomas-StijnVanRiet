@@ -18,7 +18,6 @@ namespace BarberApi.Models
         [Required]
         public string Email { get; set; }
         public string Remarks { get; set; }
-        public string Barber { get; set; }
         [Required]
         public DateTime Date { get; set; }
         [Required]

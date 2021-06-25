@@ -1,13 +1,12 @@
-using Microsoft.EntityFrameworkCore;
 using BarberApi.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 
 namespace BarberApi.Data
 {
-    public class ReservationContext : DbContext
+    public class BarberContext : DbContext
     {
-        public ReservationContext(DbContextOptions<ReservationContext> options)
+        public BarberContext(DbContextOptions<BarberContext> options)
             : base(options)
         {
         }
@@ -24,9 +23,37 @@ namespace BarberApi.Data
             builder.Entity<Reservation>().Property(r => r.LastName).IsRequired().HasMaxLength(50);
             builder.Entity<Reservation>().Property(r => r.PhoneNumber).IsRequired().HasMaxLength(50);
             builder.Entity<Reservation>().Property(r => r.Email).IsRequired().HasMaxLength(50);
-            builder.Entity<Reservation>().Property(r => r.Remarks).HasMaxLength(50);
-            builder.Entity<Reservation>().Property(r => r.Barber).HasMaxLength(50);
+            builder.Entity<Reservation>().Property(r => r.Remarks).HasMaxLength(200);
             builder.Entity<Reservation>().Property(r => r.Date).IsRequired();
+
+            builder.Entity<StandardService>().Property(r => r.Name).IsRequired().HasMaxLength(50);
+            builder.Entity<StandardService>().Property(r => r.Price).IsRequired();
+
+            builder.Entity<StandardService>().HasData(
+                new StandardService
+                {
+                    Id = 1,
+                    Name = "trim cut",
+                    Price = (double?)30
+                },
+                new StandardService
+                {
+                    Id = 2,
+                    Name = "quick shave",
+                    Price = (double?)20
+                },
+                new StandardService
+                {
+                    Id = 3,
+                    Name = "cut and brushing",
+                    Price = (double?)60
+                },
+                new StandardService
+                {
+                    Id = 4,
+                    Name = "coloring",
+                    Price = (double?)70
+                });
 
             //Another way to seed the database
             builder.Entity<Reservation>().HasData(
@@ -38,7 +65,6 @@ namespace BarberApi.Data
                      PhoneNumber = "0496512796",
                      Email = "stijn.vanriet@student.hogent.be",
                      Remarks = "This is a remark.",
-                     Barber = "Piet",
                      Date = new DateTime(2021, 08, 08, 10, 15, 0),
                  },
                  new Reservation
@@ -49,7 +75,6 @@ namespace BarberApi.Data
                      PhoneNumber = "0488888888",
                      Email = "miadesmedt@email.com",
                      Remarks = "This is also a remark.",
-                     Barber = "Jef",
                      Date = new DateTime(2021, 07, 08, 9, 15, 0),
                  });
             builder.Entity<Service>().HasData(
@@ -62,5 +87,6 @@ namespace BarberApi.Data
         }
 
         public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<StandardService> StandardServices { get; set; }
     }
 }

@@ -14,17 +14,17 @@ export class ReservationDataService {
 
   constructor(private http: HttpClient) {
     this.reservations$
-    .pipe(
-      catchError(err => {
-        console.log('error got here');
-        this._reservations$.error(err);
-        return throwError(err);
-      })
-    )
-    .subscribe((reservations: Reservation[]) => {
-      this._reservations = reservations;
-      this._reservations$.next(this._reservations);
-    });
+      .pipe(
+        catchError((err) => {
+          console.log('error got here');
+          this._reservations$.error(err);
+          return throwError(err);
+        })
+      )
+      .subscribe((reservations: Reservation[]) => {
+        this._reservations = reservations;
+        this._reservations$.next(this._reservations);
+      });
    }
 
    get allReservations$(): Observable<Reservation[]> {

@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using BarberApi.DTOs;
+﻿using BarberApi.DTOs;
 using BarberApi.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace BarberApi.Controllers
 {
@@ -52,12 +51,12 @@ namespace BarberApi.Controllers
         [HttpPost]
         public ActionResult<Reservation> PostReservation(ReservationDTO reservation)
         {
-            Reservation reservationToCreate = new Reservation() { 
+            Reservation reservationToCreate = new Reservation()
+            {
                 FirstName = reservation.FirstName,
                 LastName = reservation.LastName,
                 PhoneNumber = reservation.PhoneNumber,
                 Email = reservation.Email,
-                Barber = reservation.Barber,
                 Remarks = reservation.Remarks,
                 Date = reservation.Date,
             };

@@ -7,10 +7,10 @@ namespace BarberApi.Data.Repositories
 {
     public class ReservationRepository : IReservationRepository
     {
-        private readonly ReservationContext _context;
+        private readonly BarberContext _context;
         private readonly DbSet<Reservation> _reservations;
 
-        public ReservationRepository(ReservationContext dbContext)
+        public ReservationRepository(BarberContext dbContext)
         {
             _context = dbContext;
             _reservations = dbContext.Reservations;
