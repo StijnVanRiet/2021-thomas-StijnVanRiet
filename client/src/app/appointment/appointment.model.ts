@@ -1,6 +1,6 @@
 import { Service, ServiceJson } from './service.model';
 
-interface ReservationJson {
+interface AppointmentJson {
   id: number;
   firstName: string;
   lastName: string;
@@ -10,7 +10,7 @@ interface ReservationJson {
   services: ServiceJson[];
   date: string;
 }
-export class Reservation {
+export class Appointment {
   private _id: number;
   constructor(
     private _firstName: string,
@@ -22,8 +22,8 @@ export class Reservation {
     private _date = new Date()
   ) {}
 
-  static fromJSON(json: ReservationJson): Reservation {
-    const res = new Reservation(
+  static fromJSON(json: AppointmentJson): Appointment {
+    const app = new Appointment(
       json.firstName,
       json.services.map(Service.fromJSON),
       json.lastName,
@@ -32,12 +32,12 @@ export class Reservation {
       json.remarks,
       new Date(json.date)
     );
-    res._id = json.id;
-    return res;
+    app._id = json.id;
+    return app;
   }
 
-  toJSON(): ReservationJson {
-    return <ReservationJson>{
+  toJSON(): AppointmentJson {
+    return <AppointmentJson>{
       firstName: this.firstName,
       services: this.services.map((ser) => ser.toJSON()),
       lastName: this.lastName,

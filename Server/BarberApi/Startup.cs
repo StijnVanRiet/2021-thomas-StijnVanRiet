@@ -24,10 +24,10 @@ namespace BarberApi
         {
             services.AddControllers();
             services.AddDbContext<BarberContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("ReservationContext")));
+            options.UseSqlServer(Configuration.GetConnectionString("BarberContext")));
 
             services.AddScoped<BarberDataInitializer>();
-            services.AddScoped<IReservationRepository, ReservationRepository>();
+            services.AddScoped<IAppointmentRepository, AppointmentRepository>();
             services.AddScoped<IStandardServiceRepository, StandardServiceRepository>();
             // Register the Swagger services
             services.AddOpenApiDocument(c =>

@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon>face</mat-icon> {{ appointment.firstName}} {{ appointment.lastName}}
+    </mat-card-title>
+    <mat-card-subtitle>{{ appointment.phoneNumber }}</mat-card-subtitle>
+    <mat-card-subtitle>{{ appointment.email }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <h3 mat-subheader>Appointment  on {{ appointment.date | date: "dd/MM/yyyy, h:mm a" }}</h3>
+    <h3 mat-subheader>Services</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let service of appointment.services">
+        <app-service [service]="service"></app-service>
+      </mat-list-item>
+    </mat-list>
+    <h3 mat-subheader>Remarks</h3> 
+    <p mat-subheader>{{ appointment.remarks }}</p>
+    <button mat-raised-button (click)="deleteAppointment()" color="warn">
+      Cancel
+    </button>
+  </mat-card-content>
+</mat-card>

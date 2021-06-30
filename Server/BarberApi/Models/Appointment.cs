@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BarberApi.Models
 {
-    public class Reservation
+    public class Appointment
     {
         #region Properties
         public int Id { get; set; }
@@ -25,12 +25,12 @@ namespace BarberApi.Models
         #endregion
 
         #region Constructors
-        public Reservation()
+        public Appointment()
         {
             Services = new List<Service>();
         }
 
-        public Reservation(
+        public Appointment(
             string firstName,
             string lastName,
             string phoneNumber,

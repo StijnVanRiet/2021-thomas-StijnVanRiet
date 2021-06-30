@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BarberApi.DTOs
 {
-    public class ReservationDTO
+    public class AppointmentDTO
     {
         [Required]
         public string FirstName { get; set; }

@@ -14,17 +14,17 @@ namespace BarberApi.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<Reservation>()
+            builder.Entity<Appointment>()
                 .HasMany(p => p.Services)
                 .WithOne()
                 .IsRequired()
-                .HasForeignKey("ReservationId"); //Shadow property
-            builder.Entity<Reservation>().Property(r => r.FirstName).IsRequired().HasMaxLength(50);
-            builder.Entity<Reservation>().Property(r => r.LastName).IsRequired().HasMaxLength(50);
-            builder.Entity<Reservation>().Property(r => r.PhoneNumber).IsRequired().HasMaxLength(50);
-            builder.Entity<Reservation>().Property(r => r.Email).IsRequired().HasMaxLength(50);
-            builder.Entity<Reservation>().Property(r => r.Remarks).HasMaxLength(200);
-            builder.Entity<Reservation>().Property(r => r.Date).IsRequired();
+                .HasForeignKey("AppointmentId"); //Shadow property
+            builder.Entity<Appointment>().Property(r => r.FirstName).IsRequired().HasMaxLength(50);
+            builder.Entity<Appointment>().Property(r => r.LastName).IsRequired().HasMaxLength(50);
+            builder.Entity<Appointment>().Property(r => r.PhoneNumber).IsRequired().HasMaxLength(50);
+            builder.Entity<Appointment>().Property(r => r.Email).IsRequired().HasMaxLength(50);
+            builder.Entity<Appointment>().Property(r => r.Remarks).HasMaxLength(200);
+            builder.Entity<Appointment>().Property(r => r.Date).IsRequired();
 
             builder.Entity<StandardService>().Property(r => r.Name).IsRequired().HasMaxLength(50);
             builder.Entity<StandardService>().Property(r => r.Price).IsRequired();
@@ -56,8 +56,8 @@ namespace BarberApi.Data
                 });
 
             //Another way to seed the database
-            builder.Entity<Reservation>().HasData(
-                 new Reservation
+            builder.Entity<Appointment>().HasData(
+                 new Appointment
                  {
                      Id = 1,
                      FirstName = "Stijn",
@@ -67,7 +67,7 @@ namespace BarberApi.Data
                      Remarks = "This is a remark.",
                      Date = new DateTime(2021, 08, 08, 10, 15, 0),
                  },
-                 new Reservation
+                 new Appointment
                  {
                      Id = 2,
                      FirstName = "Mia",
@@ -79,14 +79,14 @@ namespace BarberApi.Data
                  });
             builder.Entity<Service>().HasData(
                    //Shadow property can be used for the foreign key, in combination with anonymous objects
-                   new { Id = 1, Name = "trim cut", Price = (double?)30, ReservationId = 1 },
-                   new { Id = 2, Name = "quick shave", Price = (double?)20, ReservationId = 1 },
-                   new { Id = 3, Name = "cut and brushing", Price = (double?)60, ReservationId = 2 },
-                   new { Id = 4, Name = "coloring", Price = (double?)70, ReservationId = 2 }
+                   new { Id = 1, Name = "trim cut", Price = (double?)30, AppointmentId = 1 },
+                   new { Id = 2, Name = "quick shave", Price = (double?)20, AppointmentId = 1 },
+                   new { Id = 3, Name = "cut and brushing", Price = (double?)60, AppointmentId = 2 },
+                   new { Id = 4, Name = "coloring", Price = (double?)70, AppointmentId = 2 }
                 );
         }
 
-        public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
         public DbSet<StandardService> StandardServices { get; set; }
     }
 }

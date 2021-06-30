@@ -1,7 +1,7 @@
 <div fxLayout="column" fxLayoutGap="2%">
-  <app-add-reservation (newReservation)="addNewReservation($event)"></app-add-reservation>
+  <app-add-appointment (newAppointment)="addNewAppointment($event)"></app-add-appointment>
 
-  <div *ngIf="reservations$ | async as reservations; else loadingOrError">
+  <div *ngIf="appointments$ | async as appointments; else loadingOrError">
     <div
       fxLayout="row wrap"
       fxLayout.xs="column"
@@ -9,18 +9,20 @@
       fxLayoutAlign="start"
     >
       <div
-        class="reservation"
-        *ngFor="let reservation of reservations"
+        class="appointment"
+        *ngFor="let appointment of appointments"
         fxFlex="0 0 calc(25%-0.5%)"
         fxFlex.xs="100%"
       >
-        <app-reservation [reservation]="reservation"></app-reservation>
+        <app-appointment [appointment]="appointment"></app-appointment>
       </div>
     </div>
   </div>
+  
   <mat-card class="error" *ngIf="errorMessage">
-    got an error while loading the reservation list: {{ errorMessage }}
+    got an error while loading the appointment list: {{ errorMessage }}
   </mat-card>
+
   <ng-template #loadingOrError>
     <span *ngIf="errorMessage; else loading"></span>
     <ng-template #loading>
