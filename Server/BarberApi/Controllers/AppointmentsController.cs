@@ -73,7 +73,6 @@ namespace BarberApi.Controllers
         /// Deletes a appointment
         /// </summary>
         /// <param name="id">the id of the appointment to be deleted</param>
-
         [HttpDelete("{id}")]
         public IActionResult DeleteaAppointment(int id)
         {

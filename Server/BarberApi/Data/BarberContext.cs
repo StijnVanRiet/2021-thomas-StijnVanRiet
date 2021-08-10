@@ -65,17 +65,137 @@ namespace BarberApi.Data
                      PhoneNumber = "0496512796",
                      Email = "stijn.vanriet@student.hogent.be",
                      Remarks = "This is a remark.",
-                     Date = new DateTime(2021, 08, 08, 10, 15, 0),
+                     Date = new DateTime(2021, 08, DateTime.Now.Day + 2, 8, 0, 0),
                  },
                  new Appointment
                  {
                      Id = 2,
+                     FirstName = "Stijn",
+                     LastName = "Van Riet",
+                     PhoneNumber = "0496512796",
+                     Email = "stijn.vanriet@student.hogent.be",
+                     Remarks = "This is a remark.",
+                     Date = new DateTime(2021, 08, DateTime.Now.Day + 2, 8, 45, 0),
+                 },
+                 new Appointment
+                 {
+                     Id = 3,
+                     FirstName = "Stijn",
+                     LastName = "Van Riet",
+                     PhoneNumber = "0496512796",
+                     Email = "stijn.vanriet@student.hogent.be",
+                     Remarks = "This is a remark.",
+                     Date = new DateTime(2021, 08, DateTime.Now.Day + 2, 9, 30, 0),
+                 },
+                 new Appointment
+                 {
+                     Id = 4,
+                     FirstName = "Stijn",
+                     LastName = "Van Riet",
+                     PhoneNumber = "0496512796",
+                     Email = "stijn.vanriet@student.hogent.be",
+                     Remarks = "This is a remark.",
+                     Date = new DateTime(2021, 08, DateTime.Now.Day + 2, 10, 15, 0),
+                 },
+                 new Appointment
+                 {
+                     Id = 5,
+                     FirstName = "Stijn",
+                     LastName = "Van Riet",
+                     PhoneNumber = "0496512796",
+                     Email = "stijn.vanriet@student.hogent.be",
+                     Remarks = "This is a remark.",
+                     Date = new DateTime(2021, 08, DateTime.Now.Day + 2, 11, 0, 0),
+                 },
+                 new Appointment
+                 {
+                     Id = 6,
+                     FirstName = "Stijn",
+                     LastName = "Van Riet",
+                     PhoneNumber = "0496512796",
+                     Email = "stijn.vanriet@student.hogent.be",
+                     Remarks = "This is a remark.",
+                     Date = new DateTime(2021, 08, DateTime.Now.Day + 2, 11, 45, 0),
+                 },
+                 new Appointment
+                 {
+                     Id = 7,
+                     FirstName = "Stijn",
+                     LastName = "Van Riet",
+                     PhoneNumber = "0496512796",
+                     Email = "stijn.vanriet@student.hogent.be",
+                     Remarks = "This is a remark.",
+                     Date = new DateTime(2021, 08, DateTime.Now.Day + 2, 13, 0, 0),
+                 },
+                 new Appointment
+                 {
+                     Id = 8,
+                     FirstName = "Stijn",
+                     LastName = "Van Riet",
+                     PhoneNumber = "0496512796",
+                     Email = "stijn.vanriet@student.hogent.be",
+                     Remarks = "This is a remark.",
+                     Date = new DateTime(2021, 08, DateTime.Now.Day + 2, 13, 45, 0),
+                 },
+                 new Appointment
+                 {
+                     Id = 9,
+                     FirstName = "Stijn",
+                     LastName = "Van Riet",
+                     PhoneNumber = "0496512796",
+                     Email = "stijn.vanriet@student.hogent.be",
+                     Remarks = "This is a remark.",
+                     Date = new DateTime(2021, 08, DateTime.Now.Day + 2, 14, 30, 0),
+                 },
+                 new Appointment
+                 {
+                     Id = 10,
+                     FirstName = "Stijn",
+                     LastName = "Van Riet",
+                     PhoneNumber = "0496512796",
+                     Email = "stijn.vanriet@student.hogent.be",
+                     Remarks = "This is a remark.",
+                     Date = new DateTime(2021, 08, DateTime.Now.Day + 2, 15, 15, 0),
+                 },
+                 new Appointment
+                 {
+                     Id = 11,
+                     FirstName = "Stijn",
+                     LastName = "Van Riet",
+                     PhoneNumber = "0496512796",
+                     Email = "stijn.vanriet@student.hogent.be",
+                     Remarks = "This is a remark.",
+                     Date = new DateTime(2021, 08, DateTime.Now.Day + 2, 16, 0, 0),
+                 },
+                 new Appointment
+                 {
+                     Id = 12,
+                     FirstName = "Stijn",
+                     LastName = "Van Riet",
+                     PhoneNumber = "0496512796",
+                     Email = "stijn.vanriet@student.hogent.be",
+                     Remarks = "This is a remark.",
+                     Date = new DateTime(2021, 08, DateTime.Now.Day + 2, 16, 45, 0),
+                 },
+                  new Appointment
+                  {
+                      Id = 13,
+                      FirstName = "Stijn",
+                      LastName = "Van Riet",
+                      PhoneNumber = "0496512796",
+                      Email = "stijn.vanriet@student.hogent.be",
+                      Remarks = "This is a remark.",
+                      Date = new DateTime(2021, 08, DateTime.Now.Day + 2, 17, 30, 0),
+                  },
+                 new Appointment
+                 {
+                     Id = 14,
                      FirstName = "Mia",
                      LastName = "De Smedt",
                      PhoneNumber = "0488888888",
                      Email = "miadesmedt@email.com",
                      Remarks = "This is also a remark.",
-                     Date = new DateTime(2021, 07, 08, 9, 15, 0),
+                     Date = new DateTime(2021, 08, DateTime.Now.Day + 3, 8, 45, 0),
                  });
             builder.Entity<Service>().HasData(
                    //Shadow property can be used for the foreign key, in combination with anonymous objects

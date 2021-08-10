@@ -35,6 +35,20 @@ export class AppointmentDataService {
     );
   }
 
+  get dates$(): Observable<Date[]> {
+    return this.http.get(`${environment.apiUrl}/dates/`).pipe(
+      catchError(this.handleError),
+      map((list: any[]): Date[] => list.map((dat) => new Date(dat)))
+    );
+  }
+
+  getTimeSlots$(s: String): Observable<String[]> {
+    return this.http.get(`${environment.apiUrl}/dates/${s}`).pipe(
+      catchError(this.handleError),
+      map((list: any[]): String[] => list.map((ts) => ts))
+    );
+  }
+
   get allAppointments$(): Observable<Appointment[]> {
     return this._appointments$;
   }
@@ -53,6 +67,7 @@ export class AppointmentDataService {
       .subscribe((res: Appointment) => {
         this._appointments = [...this._appointments, res];
         this._appointments$.next(this._appointments);
+        window.location.reload(); // refresh page
       });
   }
 
@@ -65,6 +80,7 @@ export class AppointmentDataService {
           (app) => app.id != appointment.id
         );
         this._appointments$.next(this._appointments);
+        window.location.reload(); // refresh page
       });
   }
 

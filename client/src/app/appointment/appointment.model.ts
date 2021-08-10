@@ -37,6 +37,9 @@ export class Appointment {
   }
 
   toJSON(): AppointmentJson {
+    var isoDateTime = new Date(
+      this.date.getTime() - this.date.getTimezoneOffset() * 60000
+    ).toISOString(); // solution to timezone problem + page needs reload (see data-service)
     return <AppointmentJson>{
       firstName: this.firstName,
       services: this.services.map((ser) => ser.toJSON()),
@@ -44,7 +47,7 @@ export class Appointment {
       phoneNumber: this.phoneNumber,
       email: this.email,
       remarks: this.remarks,
-      date: new Date(this.date).toISOString(),
+      date: isoDateTime,
     };
   }
 
