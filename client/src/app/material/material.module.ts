@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [],
@@ -43,6 +44,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatIconModule,
     MatListModule,
     MatNativeDateModule,
+    MatButtonToggleModule
   ],
   exports: [
     FlexLayoutModule,
@@ -68,6 +70,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatIconModule,
     MatListModule,
     MatNativeDateModule,
+    MatButtonToggleModule
   ],
 })
 export class MaterialModule {}

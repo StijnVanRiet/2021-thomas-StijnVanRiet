@@ -3,7 +3,6 @@ import {
   FormGroup,
   Validators,
   FormBuilder,
-  AbstractControl,
 } from '@angular/forms';
 import { EMPTY, Observable } from 'rxjs';
 import { distinctUntilChanged, catchError } from 'rxjs/operators';
@@ -17,22 +16,27 @@ import { Service } from '../service.model';
   styleUrls: ['./add-appointment.component.css'],
 })
 export class AddAppointmentComponent implements OnInit {
-  private _fetchServices$: Observable<Service[]>;
-  private services: Service[];
+  private _fetchCategories$: Observable<String[]>;
+  private categories = String[''];
+  public services: Service[];
   private _fetchDates$: Observable<Date[]>;
   private dates: Date[];
   public timeSlots = String[''];
   public errorMessage: string = '';
   public appointment: FormGroup;
   @Output() public newAppointment = new EventEmitter<Appointment>();
+  public show1: boolean = false;
+  public show2: boolean = false;
+  public show3: boolean = false;
+  public show4: boolean = false;
 
   constructor(
     private _appointmentDataService: AppointmentDataService,
     private fb: FormBuilder
   ) {}
 
-  get services$(): Observable<Service[]> {
-    return this._fetchServices$;
+  get categories$(): Observable<String[]> {
+    return this._fetchCategories$;
   }
 
   get dates$(): Observable<Date[]> {
@@ -40,15 +44,17 @@ export class AddAppointmentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._fetchServices$ = this._appointmentDataService.services$.pipe(
+    this._fetchCategories$ = this._appointmentDataService.categories$.pipe(
       catchError((err) => {
         this.errorMessage = err;
         return EMPTY;
       })
     );
-    this._appointmentDataService.services$.subscribe((services: Service[]) => {
-      this.services = services;
-    });
+    this._appointmentDataService.categories$.subscribe(
+      (categories: String[]) => {
+        this.categories = categories;
+      }
+    );
 
     this._fetchDates$ = this._appointmentDataService.dates$.pipe(
       catchError((err) => {
@@ -74,6 +80,7 @@ export class AddAppointmentComponent implements OnInit {
         '',
         [Validators.required, Validators.pattern(/^[0-9]{10}$/)],
       ],
+      categories: ['', [Validators.required]],
       service1: ['', [Validators.required]],
       service2: [''],
       service3: [''],
@@ -82,23 +89,53 @@ export class AddAppointmentComponent implements OnInit {
       time: ['', [Validators.required]],
     });
 
-    // change available time slots depending on date
-    this.date.valueChanges.pipe(distinctUntilChanged()).subscribe((list) => {
-      var date = this.date.value;
-      var month = date.getMonth() + 1;
-      var day = date.getDate();
-      var year = date.getFullYear();
-      let s = year + '-' + month + '-' + day + 'T00:00:00.000Z';
-      this._appointmentDataService
-        .getTimeSlots$(s)
-        .subscribe((slots: String[]) => {
-          this.timeSlots = slots;
-        });
-    });
-  }
+    this.appointment
+      .get('categories')
+      .valueChanges.pipe(distinctUntilChanged())
+      .subscribe((list) => {
+        this.show1 = true;
+        this.appointment.controls['service1'].reset()
+        this.appointment.controls['service2'].reset()
+        this.appointment.controls['service3'].reset()
+        this.show2 = false;
+        this.show3 = false;
+        this._appointmentDataService
+          .getServices$(this.appointment.get('categories').value)
+          .subscribe((s: Service[]) => {
+            this.services = s;
+          });
+      });
 
-  get date(): AbstractControl {
-    return this.appointment.get('date');
+    this.appointment
+      .get('service1')
+      .valueChanges.pipe(distinctUntilChanged())
+      .subscribe((list) => {
+        this.show2 = true;
+      });
+    this.appointment
+      .get('service2')
+      .valueChanges.pipe(distinctUntilChanged())
+      .subscribe((list) => {
+        this.show3 = true;
+      });
+
+    // change available time slots depending on date
+    this.appointment
+      .get('date')
+      .valueChanges.pipe(distinctUntilChanged())
+      .subscribe((list) => {
+        var date = this.appointment.get('date').value;
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+        var year = date.getFullYear();
+        let s = year + '-' + month + '-' + day + 'T00:00:00.000Z';
+        this._appointmentDataService
+          .getTimeSlots$(s)
+          .subscribe((slots: String[]) => {
+            this.timeSlots = slots;
+          });
+        this.show4 = true;
+      });
   }
 
   // call api for available dates
@@ -115,11 +152,11 @@ export class AddAppointmentComponent implements OnInit {
 
   onSubmit() {
     let services = [this.appointment.value.service1];
-    if (this.appointment.value.service2 != '') {
+    if (this.appointment.value.service2 != null) {
       services.push(this.appointment.value.service2);
     }
 
-    if (this.appointment.value.service3 != '') {
+    if (this.appointment.value.service3 != null) {
       services.push(this.appointment.value.service3);
     }
 

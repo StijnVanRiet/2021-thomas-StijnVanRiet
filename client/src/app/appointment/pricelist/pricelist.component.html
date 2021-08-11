@@ -1,0 +1,52 @@
+<mat-card>
+  <mat-card-title>Pricelist</mat-card-title>
+  <mat-button-toggle-group name="list" aria-label="list" value="womenpricelist">
+    <mat-button-toggle
+      (change)="onValChange($event.value)"
+      value="womenpricelist"
+      >Women</mat-button-toggle
+    >
+    <mat-button-toggle (change)="onValChange($event.value)" value="menpricelist"
+      >Men</mat-button-toggle
+    >
+    <mat-button-toggle
+      (change)="onValChange($event.value)"
+      value="studentspricelist"
+      >Students</mat-button-toggle
+    >
+    <mat-button-toggle
+      (change)="onValChange($event.value)"
+      value="kidspricelist"
+      >Kids</mat-button-toggle
+    >
+  </mat-button-toggle-group>
+
+  <div *ngIf="list$ | async as list; else loadingOrError">
+    <div
+      fxLayout="row wrap"
+      fxLayout.xs="column"
+      fxLayoutGap="0.5%"
+      fxLayoutAlign="start"
+    >
+      <div
+        class="list"
+        *ngFor="let item of list"
+        fxFlex="0 0 calc(25%-0.5%)"
+        fxFlex.xs="100%"
+      >
+        <p>{{ item.name }}: €{{ item.price }}</p>
+      </div>
+    </div>
+  </div>
+</mat-card>
+
+<mat-card class="error" *ngIf="errorMessage">
+  got an error while loading the pricelist: {{ errorMessage }}
+</mat-card>
+
+<ng-template #loadingOrError>
+  <span *ngIf="errorMessage; else loading"></span>
+  <ng-template #loading>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+</ng-template>

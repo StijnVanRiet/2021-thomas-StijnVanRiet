@@ -12,6 +12,7 @@ namespace BarberApi.Models
         void Delete(StandardService standardService);
         void Update(StandardService standardService);
         void SaveChanges();
+        IEnumerable<StandardService> GetAllInCategorie(string categorie);
     }
 }
 

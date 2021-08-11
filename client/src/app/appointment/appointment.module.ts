@@ -7,6 +7,7 @@ import { AppointmentListComponent } from './appointment-list/appointment-list.co
 import { AddAppointmentComponent } from './add-appointment/add-appointment.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PricelistComponent } from './pricelist/pricelist.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ServiceComponent,
     AppointmentListComponent,
     AddAppointmentComponent,
+    PricelistComponent,
   ],
   imports: [
     CommonModule,

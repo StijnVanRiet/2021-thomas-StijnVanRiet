@@ -27,9 +27,15 @@ export class AppointmentDataService {
         this._appointments$.next(this._appointments);
       });
   }
+  get categories$(): Observable<String[]> {
+    return this.http.get(`${environment.apiUrl}/categories/`).pipe(
+      catchError(this.handleError),
+      map((list: any[]): String[] => list.map((c) => c))
+    );
+  }
 
-  get services$(): Observable<Service[]> {
-    return this.http.get(`${environment.apiUrl}/standardservices/`).pipe(
+  getServices$(categorie: String): Observable<Service[]> {
+    return this.http.get(`${environment.apiUrl}/standardservices/${categorie}`).pipe(
       catchError(this.handleError),
       map((list: any[]): Service[] => list.map(Service.fromJSON))
     );

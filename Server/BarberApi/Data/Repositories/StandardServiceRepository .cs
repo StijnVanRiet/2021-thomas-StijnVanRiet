@@ -21,6 +21,11 @@ namespace BarberApi.Data.Repositories
             return _standardServices.ToList();
         }
 
+        public IEnumerable<StandardService> GetAllInCategorie(string categorie)
+        {
+            return _standardServices.Where(r => r.Categorie.Equals(categorie)).ToList();
+        }
+
         public StandardService GetBy(int id)
         {
             return _standardServices.SingleOrDefault(r => r.Id == id);
@@ -57,8 +62,8 @@ namespace BarberApi.Data.Repositories
             var standardServices = _standardServices.AsQueryable();
             if (!string.IsNullOrEmpty(name))
                 standardServices = standardServices.Where(r => r.Name.IndexOf(name) >= 0);
-            if (price!=null)
-                standardServices = standardServices.Where(r => r.Price==price);
+            if (price != null)
+                standardServices = standardServices.Where(r => r.Price == price);
             return standardServices.OrderBy(r => r.Name).ToList();
         }
     }

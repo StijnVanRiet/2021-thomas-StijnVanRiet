@@ -1,32 +1,38 @@
 <div fxLayout="column" fxLayoutGap="2%">
-  <app-add-appointment (newAppointment)="addNewAppointment($event)"></app-add-appointment>
+  <app-pricelist></app-pricelist>
+  <app-add-appointment
+    (newAppointment)="addNewAppointment($event)"
+  ></app-add-appointment>
 
-  <div *ngIf="appointments$ | async as appointments; else loadingOrError">
-    <div
-      fxLayout="row wrap"
-      fxLayout.xs="column"
-      fxLayoutGap="0.5%"
-      fxLayoutAlign="start"
-    >
+  <mat-card>
+    <mat-card-title>Your appointments</mat-card-title>
+    <div *ngIf="appointments$ | async as appointments; else loadingOrError">
       <div
-        class="appointment"
-        *ngFor="let appointment of appointments"
-        fxFlex="0 0 calc(25%-0.5%)"
-        fxFlex.xs="100%"
+        fxLayout="row wrap"
+        fxLayout.xs="column"
+        fxLayoutGap="0.5%"
+        fxLayoutAlign="start"
       >
-        <app-appointment [appointment]="appointment"></app-appointment>
+        <div
+          class="appointment"
+          *ngFor="let appointment of appointments"
+          fxFlex="0 0 calc(25%-0.5%)"
+          fxFlex.xs="100%"
+        >
+          <app-appointment [appointment]="appointment"></app-appointment>
+        </div>
       </div>
     </div>
-  </div>
-  
-  <mat-card class="error" *ngIf="errorMessage">
-    got an error while loading the appointment list: {{ errorMessage }}
   </mat-card>
-
-  <ng-template #loadingOrError>
-    <span *ngIf="errorMessage; else loading"></span>
-    <ng-template #loading>
-      <mat-spinner></mat-spinner>
-    </ng-template>
-  </ng-template>
 </div>
+
+<mat-card class="error" *ngIf="errorMessage">
+  got an error while loading the appointment list: {{ errorMessage }}
+</mat-card>
+
+<ng-template #loadingOrError>
+  <span *ngIf="errorMessage; else loading"></span>
+  <ng-template #loading>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+</ng-template>
