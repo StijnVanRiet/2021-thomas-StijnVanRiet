@@ -1,6 +1,8 @@
-﻿using BarberApi.DTOs;
-using BarberApi.Models;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using BarberApi.DTOs;
+using BarberApi.Models;
 using System.Collections.Generic;
 
 namespace BarberApi.Controllers
@@ -8,14 +10,17 @@ namespace BarberApi.Controllers
     [ApiConventionType(typeof(DefaultApiConventions))]
     [Produces("application/json")]
     [Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     public class AppointmentsController : ControllerBase
     {
         private readonly IAppointmentRepository _appointmentRepository;
+        private readonly ICustomerRepository _customerRepository;
 
-        public AppointmentsController(IAppointmentRepository context)
+        public AppointmentsController(IAppointmentRepository context, ICustomerRepository customerRepository)
         {
             _appointmentRepository = context;
+            _customerRepository = customerRepository;
         }
 
         // GET: api/Appointments
@@ -64,6 +69,9 @@ namespace BarberApi.Controllers
                 appointmentToCreate.AddService(new Service(i.Name, i.Price));
             _appointmentRepository.Add(appointmentToCreate);
             _appointmentRepository.SaveChanges();
+            Customer customer = _customerRepository.GetBy(User.Identity.Name);
+            customer.AddAppointment(appointmentToCreate);
+            _customerRepository.SaveChanges();
 
             return CreatedAtAction(nameof(GetAppointment), new { id = appointmentToCreate.Id }, appointmentToCreate);
         }
@@ -74,7 +82,7 @@ namespace BarberApi.Controllers
         /// </summary>
         /// <param name="id">the id of the appointment to be deleted</param>
         [HttpDelete("{id}")]
-        public IActionResult DeleteaAppointment(int id)
+        public IActionResult DeleteAppointment(int id)
         {
             Appointment appointment = _appointmentRepository.GetBy(id);
             if (appointment == null)
@@ -84,6 +92,16 @@ namespace BarberApi.Controllers
             _appointmentRepository.Delete(appointment);
             _appointmentRepository.SaveChanges();
             return NoContent();
+        }
+
+        /// <summary>
+        /// Get appointments of current user
+        /// </summary>
+        [HttpGet("Appointments")]
+        public IEnumerable<Appointment> GetUserAppointments()
+        {
+            Customer customer = _customerRepository.GetBy(User.Identity.Name);
+            return customer.OwnAppointments;
         }
 
     }

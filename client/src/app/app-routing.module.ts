@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SelectivePreloadStrategy } from './SelectivePreloadStrategy';
+import { AuthGuard } from './user/auth.guard';
 
 const appRoutes: Routes = [
   {
     path: 'appointment',
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./appointment/appointment.module').then(
         (mod) => mod.AppointmentModule

@@ -1,10 +1,11 @@
 using BarberApi.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace BarberApi.Data
 {
-    public class BarberContext : DbContext
+    public class BarberContext : IdentityDbContext
     {
         public BarberContext(DbContextOptions<BarberContext> options)
             : base(options)
@@ -25,6 +26,15 @@ namespace BarberApi.Data
             builder.Entity<Appointment>().Property(r => r.Email).IsRequired().HasMaxLength(50);
             builder.Entity<Appointment>().Property(r => r.Remarks).HasMaxLength(200);
             builder.Entity<Appointment>().Property(r => r.Date).IsRequired();
+
+            builder.Entity<Customer>().Property(c => c.LastName).IsRequired().HasMaxLength(50);
+            builder.Entity<Customer>().Property(c => c.FirstName).IsRequired().HasMaxLength(50);
+            builder.Entity<Customer>().Property(c => c.Email).IsRequired().HasMaxLength(100);
+            builder.Entity<Customer>().Ignore(c => c.OwnAppointments);
+
+            builder.Entity<CustomerAppointment>().HasKey(f => new { f.CustomerId, f.AppointmentId });
+            builder.Entity<CustomerAppointment>().HasOne(f => f.Customer).WithMany(u => u.Appointments).HasForeignKey(f => f.CustomerId);
+            builder.Entity<CustomerAppointment>().HasOne(f => f.Appointment).WithMany().HasForeignKey(f => f.AppointmentId);
 
             builder.Entity<StandardService>().Property(r => r.Name).IsRequired().HasMaxLength(50);
             builder.Entity<StandardService>().Property(r => r.Price).IsRequired();
@@ -529,12 +539,12 @@ namespace BarberApi.Data
                  new Appointment
                  {
                      Id = 2,
-                     FirstName = "Jan",
-                     LastName = "Vermorgen",
-                     PhoneNumber = "0466666666",
-                     Email = "jan.vermorgen@mail.be",
-                     Remarks = "",
-                     Date = new DateTime(2021, 08, DateTime.Now.Day + 2, 8, 45, 0),
+                     FirstName = "Mia",
+                     LastName = "De Smedt",
+                     PhoneNumber = "0488888888",
+                     Email = "mia.desmedt@mail.com",
+                     Remarks = "This is also a remark.",
+                     Date = new DateTime(2021, 08, DateTime.Now.Day + 3, 8, 45, 0),
                  },
                  new Appointment
                  {
@@ -649,36 +659,37 @@ namespace BarberApi.Data
                  new Appointment
                  {
                      Id = 14,
-                     FirstName = "Mia",
-                     LastName = "De Smedt",
-                     PhoneNumber = "0488888888",
-                     Email = "miadesmedt@email.com",
-                     Remarks = "This is also a remark.",
-                     Date = new DateTime(2021, 08, DateTime.Now.Day + 3, 8, 45, 0),
+                     FirstName = "Jan",
+                     LastName = "Vermorgen",
+                     PhoneNumber = "0466666666",
+                     Email = "jan.vermorgen@mail.be",
+                     Remarks = "",
+                     Date = new DateTime(2021, 08, DateTime.Now.Day + 2, 8, 45, 0),
                  });
             builder.Entity<Service>().HasData(
                    //Shadow property can be used for the foreign key, in combination with anonymous objects
                    new { Id = 1, Name = "Trim cut", Price = (double?)29, AppointmentId = 1 },
-                   new { Id = 2, Name = "Quick shave", Price = (double?)26, AppointmentId = 1 },
-                   new { Id = 3, Name = "Complete shave", Price = (double?)32, AppointmentId = 2 },
-                   new { Id = 4, Name = "Make up", Price = (double?)48, AppointmentId = 3 },
-                   new { Id = 5, Name = "Brush", Price = (double?)39, AppointmentId = 4 },
-                   new { Id = 6, Name = "Special cut", Price = (double?)45, AppointmentId = 5 },
-                   new { Id = 7, Name = "Quick shave", Price = (double?)26, AppointmentId = 6 },
-                   new { Id = 8, Name = "Head shave", Price = (double?)36, AppointmentId = 7 },
-                   new { Id = 9, Name = "Cut", Price = (double?)44, AppointmentId = 8 },
-                   new { Id = 10, Name = "Cut and brush", Price = (double?)64, AppointmentId = 9 },
-                   new { Id = 11, Name = "Cut & styling", Price = (double?)38, AppointmentId = 10 },
-                   new { Id = 12, Name = "Brush", Price = (double?)39, AppointmentId = 11 },
-                   new { Id = 13, Name = "Make up", Price = (double?)48, AppointmentId = 11 },
-                   new { Id = 14, Name = "Cut and brush", Price = (double?)64, AppointmentId = 12 },
-                   new { Id = 15, Name = "Complete shave", Price = (double?)32, AppointmentId = 13 },
-                   new { Id = 16, Name = "Cut and brush", Price = (double?)64, AppointmentId = 14 },
-                   new { Id = 17, Name = "Coloring", Price = (double?)71, AppointmentId = 14 }
+                   new { Id = 2, Name = "Quick shave", Price = (double?)26, AppointmentId = 1 },                   
+                   new { Id = 3, Name = "Cut and brush", Price = (double?)64, AppointmentId = 2 },
+                   new { Id = 4, Name = "Coloring", Price = (double?)71, AppointmentId = 2 },                  
+                   new { Id = 5, Name = "Make up", Price = (double?)48, AppointmentId = 3 },
+                   new { Id = 6, Name = "Brush", Price = (double?)39, AppointmentId = 4 },
+                   new { Id = 7, Name = "Special cut", Price = (double?)45, AppointmentId = 5 },
+                   new { Id = 8, Name = "Quick shave", Price = (double?)26, AppointmentId = 6 },
+                   new { Id = 9, Name = "Head shave", Price = (double?)36, AppointmentId = 7 },
+                   new { Id = 10, Name = "Cut", Price = (double?)44, AppointmentId = 8 },
+                   new { Id = 11, Name = "Cut and brush", Price = (double?)64, AppointmentId = 9 },
+                   new { Id = 12, Name = "Cut & styling", Price = (double?)38, AppointmentId = 10 },
+                   new { Id = 13, Name = "Brush", Price = (double?)39, AppointmentId = 11 },
+                   new { Id = 14, Name = "Make up", Price = (double?)48, AppointmentId = 11 },
+                   new { Id = 15, Name = "Cut and brush", Price = (double?)64, AppointmentId = 12 },
+                   new { Id = 16, Name = "Complete shave", Price = (double?)32, AppointmentId = 13 },
+                   new { Id = 17, Name = "Complete shave", Price = (double?)32, AppointmentId = 14 }
                 );
         }
 
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<StandardService> StandardServices { get; set; }
+        public DbSet<Customer> Customers { get; set; }
     }
 }

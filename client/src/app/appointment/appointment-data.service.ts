@@ -60,7 +60,7 @@ export class AppointmentDataService {
   }
 
   get appointments$(): Observable<Appointment[]> {
-    return this.http.get(`${environment.apiUrl}/appointments/`).pipe(
+    return this.http.get(`${environment.apiUrl}/appointments/appointments`).pipe(
       catchError(this.handleError),
       map((list: any[]): Appointment[] => list.map(Appointment.fromJSON))
     );

@@ -52,14 +52,5 @@ namespace BarberApi.Data.Repositories
             _context.SaveChanges();
         }
 
-        public IEnumerable<Appointment> GetBy(string firstName = null, string lastName = null)
-        {
-            var appointments = _appointments.AsQueryable();
-            if (!string.IsNullOrEmpty(firstName))
-                appointments = appointments.Where(r => r.FirstName.IndexOf(firstName) >= 0);
-            if (!string.IsNullOrEmpty(lastName))
-                appointments = appointments.Where(r => r.LastName.IndexOf(lastName) >= 0);
-            return appointments.OrderBy(r => r.FirstName).ToList();
-        }
     }
 }
