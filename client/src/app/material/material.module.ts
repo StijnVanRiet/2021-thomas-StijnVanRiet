@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
@@ -15,7 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [],
@@ -37,14 +36,13 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     MatListModule,
     LayoutModule,
     MatDatepickerModule,
-    BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
     MatNativeDateModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
   ],
   exports: [
     FlexLayoutModule,
@@ -63,14 +61,13 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     MatListModule,
     LayoutModule,
     MatDatepickerModule,
-    BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
     MatNativeDateModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
   ],
 })
 export class MaterialModule {}

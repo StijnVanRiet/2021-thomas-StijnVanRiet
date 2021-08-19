@@ -1,26 +1,33 @@
 <mat-card>
-  <mat-card-title>Pricelist</mat-card-title>
-  <mat-button-toggle-group name="list" aria-label="list" value="womenpricelist">
-    <mat-button-toggle
-      (change)="onValChange($event.value)"
+  <mat-card-title class="center">Pricelist</mat-card-title>
+  <div class="center">
+    <mat-button-toggle-group
+      name="list"
+      aria-label="list"
       value="womenpricelist"
-      >Women</mat-button-toggle
     >
-    <mat-button-toggle (change)="onValChange($event.value)" value="menpricelist"
-      >Men</mat-button-toggle
-    >
-    <mat-button-toggle
-      (change)="onValChange($event.value)"
-      value="studentspricelist"
-      >Students</mat-button-toggle
-    >
-    <mat-button-toggle
-      (change)="onValChange($event.value)"
-      value="kidspricelist"
-      >Kids</mat-button-toggle
-    >
-  </mat-button-toggle-group>
-
+      <mat-button-toggle
+        (change)="onValChange($event.value)"
+        value="womenpricelist"
+        >Women</mat-button-toggle
+      >
+      <mat-button-toggle
+        (change)="onValChange($event.value)"
+        value="menpricelist"
+        >Men</mat-button-toggle
+      >
+      <mat-button-toggle
+        (change)="onValChange($event.value)"
+        value="studentspricelist"
+        >Students</mat-button-toggle
+      >
+      <mat-button-toggle
+        (change)="onValChange($event.value)"
+        value="kidspricelist"
+        >Kids</mat-button-toggle
+      >
+    </mat-button-toggle-group>
+  </div>
   <div *ngIf="list$ | async as list; else loadingOrError">
     <div
       fxLayout="row wrap"

@@ -1,0 +1,9 @@
+.center {
+  background-color: grey;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  padding: 1px;
+}

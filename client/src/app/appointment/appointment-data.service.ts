@@ -86,7 +86,7 @@ export class AppointmentDataService {
           (app) => app.id != appointment.id
         );
         this._appointments$.next(this._appointments);
-        window.location.reload(); // refresh page
+        //window.location.reload(); // refresh page
       });
   }
 

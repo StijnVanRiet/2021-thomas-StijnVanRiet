@@ -1,9 +1,4 @@
 <div fxLayout="column" fxLayoutGap="2%">
-  <app-pricelist></app-pricelist>
-  <app-add-appointment
-    (newAppointment)="addNewAppointment($event)"
-  ></app-add-appointment>
-
   <mat-card>
     <mat-card-title>Your appointments</mat-card-title>
     <div *ngIf="appointments$ | async as appointments; else loadingOrError">
@@ -19,7 +14,10 @@
           fxFlex="0 0 calc(25%-0.5%)"
           fxFlex.xs="100%"
         >
-          <app-appointment [appointment]="appointment"></app-appointment>
+          <app-appointment
+            class="card"
+            [appointment]="appointment"
+          ></app-appointment>
         </div>
       </div>
     </div>

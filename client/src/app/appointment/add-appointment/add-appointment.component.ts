@@ -1,14 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import {
-  FormGroup,
-  Validators,
-  FormBuilder,
-} from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { EMPTY, Observable } from 'rxjs';
 import { distinctUntilChanged, catchError } from 'rxjs/operators';
 import { AppointmentDataService } from '../appointment-data.service';
 import { Appointment } from '../appointment.model';
 import { Service } from '../service.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-appointment',
@@ -24,13 +21,13 @@ export class AddAppointmentComponent implements OnInit {
   public timeSlots = String[''];
   public errorMessage: string = '';
   public appointment: FormGroup;
-  @Output() public newAppointment = new EventEmitter<Appointment>();
   public show1: boolean = false;
   public show2: boolean = false;
   public show3: boolean = false;
   public show4: boolean = false;
 
   constructor(
+    private router: Router,
     private _appointmentDataService: AppointmentDataService,
     private fb: FormBuilder
   ) {}
@@ -94,9 +91,9 @@ export class AddAppointmentComponent implements OnInit {
       .valueChanges.pipe(distinctUntilChanged())
       .subscribe((list) => {
         this.show1 = true;
-        this.appointment.controls['service1'].reset()
-        this.appointment.controls['service2'].reset()
-        this.appointment.controls['service3'].reset()
+        this.appointment.controls['service1'].reset();
+        this.appointment.controls['service2'].reset();
+        this.appointment.controls['service3'].reset();
         this.show2 = false;
         this.show3 = false;
         this._appointmentDataService
@@ -171,7 +168,7 @@ export class AddAppointmentComponent implements OnInit {
     const time = this.appointment.value.time;
     const completeDate = date + ' ' + time + ':00';
 
-    this.newAppointment.emit(
+    this._appointmentDataService.addNewAppointment(
       new Appointment(
         this.appointment.value.firstName,
         array,
@@ -182,6 +179,7 @@ export class AddAppointmentComponent implements OnInit {
         new Date(completeDate)
       )
     );
+    this.router.navigate(['/appointment/list']);
   }
 
   getErrorMessage(errors: any): string {
