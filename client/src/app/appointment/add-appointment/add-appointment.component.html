@@ -11,6 +11,7 @@
             type="text"
             formControlName="firstName"
             required
+            data-cy="add-firstName"
           />
           <mat-error
             *ngIf="
@@ -29,6 +30,7 @@
             type="text"
             formControlName="lastName"
             required
+            data-cy="add-lastName"
           />
           <mat-error
             *ngIf="
@@ -49,6 +51,7 @@
             type="text"
             formControlName="email"
             required
+            data-cy="add-email"
           />
           <mat-error
             *ngIf="
@@ -67,6 +70,7 @@
             type="text"
             formControlName="phoneNumber"
             required
+            data-cy="add-phoneNumber"
           />
           <mat-error
             *ngIf="
@@ -86,8 +90,10 @@
               aria-label="Categorie"
               formControlName="categories"
               required
+              data-cy="add-category"
             >
               <mat-option
+                data-cy="add-category-option"
                 *ngFor="let categorie of categories"
                 [value]="categorie"
               >
@@ -112,8 +118,13 @@
             aria-label="Service"
             formControlName="service1"
             required
+            data-cy="add-service1"
           >
-            <mat-option *ngFor="let service of services" [value]="service.name">
+            <mat-option
+              data-cy="add-service1-option"
+              *ngFor="let service of services"
+              [value]="service.name"
+            >
               {{ service.name }}: €{{ service.price }}
             </mat-option>
           </mat-select>
@@ -132,8 +143,13 @@
             placeholder="Service"
             aria-label="Service"
             formControlName="service2"
+            data-cy="add-service2"
           >
-            <mat-option *ngFor="let service of services" [value]="service.name">
+            <mat-option
+              data-cy="add-service2-option"
+              *ngFor="let service of services"
+              [value]="service.name"
+            >
               {{ service.name }}: €{{ service.price }}
             </mat-option>
           </mat-select>
@@ -144,8 +160,13 @@
             placeholder="Service"
             aria-label="Service"
             formControlName="service3"
+            data-cy="add-service3"
           >
-            <mat-option *ngFor="let service of services" [value]="service.name">
+            <mat-option
+              data-cy="add-service3-option"
+              *ngFor="let service of services"
+              [value]="service.name"
+            >
               {{ service.name }}: €{{ service.price }}
             </mat-option>
           </mat-select>
@@ -163,6 +184,7 @@
             aria-label="Remarks"
             placeholder="Ex. I would like to color my hair blue..."
             formControlName="remarks"
+            data-cy="add-remarks"
           >
           </textarea>
           <mat-error
@@ -189,6 +211,7 @@
               disabled
             />
             <mat-datepicker-toggle
+              data-cy="add-date"
               matSuffix
               [for]="picker"
             ></mat-datepicker-toggle>
@@ -212,8 +235,13 @@
             aria-label="Time"
             formControlName="time"
             required
+            data-cy="add-time"
           >
-            <mat-option *ngFor="let time of timeSlots" [value]="time">
+            <mat-option
+              data-cy="add-time-option"
+              *ngFor="let time of timeSlots"
+              [value]="time"
+            >
               {{ time }}
             </mat-option>
           </mat-select>
@@ -234,6 +262,7 @@
           mat-raised-button
           [disabled]="!appointment.valid"
           color="primary"
+          data-cy="makeAppointment"
         >
           Make Appointment
         </button>
@@ -241,7 +270,7 @@
     </mat-card-content>
   </mat-card>
 
-  <mat-card class="error" *ngIf="errorMessage">
+  <mat-card data-cy="appError" class="error" *ngIf="errorMessage">
     got an error while loading the service list: {{ errorMessage }}
   </mat-card>
 

@@ -47,7 +47,7 @@
   </div>
 </mat-card>
 
-<mat-card class="error" *ngIf="errorMessage">
+<mat-card data-cy="appError" class="error" *ngIf="errorMessage">
   got an error while loading the pricelist: {{ errorMessage }}
 </mat-card>
 

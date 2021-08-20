@@ -19,7 +19,12 @@
     </mat-list>
     <h3 mat-subheader>Remarks</h3>
     <p mat-subheader>{{ appointment.remarks }}</p>
-    <button mat-raised-button (click)="deleteAppointment()" color="warn">
+    <button
+      data-cy="cancel"
+      mat-raised-button
+      (click)="deleteAppointment()"
+      color="warn"
+    >
       Cancel
     </button>
   </mat-card-content>

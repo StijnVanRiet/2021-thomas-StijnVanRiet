@@ -9,8 +9,12 @@
   >
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="['appointment/list']">Appointments</a>
-      <a mat-list-item [routerLink]="['appointment/add']">Add appointment</a>
+      <a data-cy="list" mat-list-item [routerLink]="['appointment/list']"
+        >Appointments</a
+      >
+      <a data-cy="add" mat-list-item [routerLink]="['appointment/add']"
+        >Add appointment</a
+      >
       <a mat-list-item [routerLink]="['appointment/pricelist']">Pricelist</a>
     </mat-nav-list>
   </mat-sidenav>

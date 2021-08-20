@@ -15,6 +15,7 @@
           fxFlex.xs="100%"
         >
           <app-appointment
+            data-cy="appointmentCard"
             class="card"
             [appointment]="appointment"
           ></app-appointment>
@@ -24,7 +25,7 @@
   </mat-card>
 </div>
 
-<mat-card class="error" *ngIf="errorMessage">
+<mat-card data-cy="appError" class="error" *ngIf="errorMessage">
   got an error while loading the appointment list: {{ errorMessage }}
 </mat-card>
 
