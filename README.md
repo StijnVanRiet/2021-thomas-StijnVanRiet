@@ -1,10 +1,9 @@
 # 2021-thomas-StijnVanRiet
 2021-thomas-StijnVanRiet created by GitHub Classroom
 
-use "npm start" in client folder to run client
+Go to client folder and run "npm start" in terminal to run client
 
-use "dotnet run" in BarberApi folder to run server
-
+Go to BarberApi folder and run "dotnet run" in terminal to run server
 
 logins:
 
